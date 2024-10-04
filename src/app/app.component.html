@@ -20,7 +20,15 @@
         <img src="{{user?.response?.picture?.data?.url}}" [style.height]="user?.response?.picture?.data?.height" [style.height]="user?.response?.picture?.data?.width" alt="{{ user.name }}">
        
       </div>
-      <button class="btn btn-outline-success" (click)="signInWithFB()">Facbook SignIn</button>
+      <div class="car">
+        <P>Facebook</P>
+        <button class="btn btn-outline-success" (click)="signInWithFB()">Facbook SignIn</button>
+        <button class="btn btn-outline-danger" (click)="signout()">Facbook Signout</button>
+      </div>
+      <div class="card"> 
+        <P>Linked in</P>
+        <button  class="btn btn-outline-success" (click)="loginWithLinkedIn()">Login with LinkedIn</button>
+      </div>
     </div>
   </div>
 </div>
