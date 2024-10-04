@@ -1,6 +1,6 @@
 import { FacebookLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 
 
@@ -29,7 +29,7 @@ const linkedInAuthConfig: AuthConfig = {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'liveAngularApp';
   public userProfile:any
   public user: any;
@@ -50,10 +50,10 @@ export class AppComponent {
     });
   }
   getFacebookPages(accessToken: string): void {
-this.http.get(`https://graph.facebook.com/v12.0/me/accounts?access_token=${accessToken}`).subscribe((res:any)=>{
-  console.log(res);
-  
-})
+    this.http.get(`https://graph.facebook.com/v12.0/me/accounts?access_token=${accessToken}`).subscribe((res: any) => {
+      console.log(res);
+
+    })
 
     const url = `https://graph.facebook.com/v12.0/me/accounts?access_token=${accessToken}`;
     
@@ -77,21 +77,47 @@ this.http.get(`https://graph.facebook.com/v12.0/me/accounts?access_token=${acces
   signout(): void {
     this.authService.signOut();
   }
-  loginWithLinkedIn() {
-    console.log("djcdkhv");
-    
-    this.oauthService.initImplicitFlow();
+  ngOnInit(): void {
     this.handleLinkedInCallback()
+  }
+  loginWithLinkedIn() {
+    this.oauthService.initImplicitFlow();
   }
 
   handleLinkedInCallback() {
+    
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.oauthService.hasValidAccessToken()) {
-        const userInfo = this.oauthService.getIdentityClaims();
-        console.log('Logged in user info:', userInfo);
+          // Get user info from LinkedIn
+          this.getUserInfo();
       }
-    });
+  });
+
+    // this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+    //   if (this.oauthService.hasValidAccessToken()) {
+    //     const userInfo = this.oauthService.getIdentityClaims();
+    //     console.log('Logged in user info:', userInfo);
+    //   }
+    // });
   }
+
+
+  getUserInfo() {
+    const accessToken = this.oauthService.getAccessToken();
+    const headers = new HttpHeaders({ Authorization: `Bearer ${accessToken}` });
+
+    this.http.get('https://api.linkedin.com/v2/me', { headers })
+        .subscribe(
+            (userData) => {
+                console.log('Logged in user data:', userData);
+                // Process user data as needed
+            },
+            (error) => {
+                console.error('Error fetching user data:', error);
+            }
+        );
+}
+
   private configureOAuth(): void {
     // this.oauthService.configure(linkedInAuthConfig);
     // this.oauthService.setupAutomaticSilentRefresh();
