@@ -1,6 +1,7 @@
 import { FacebookLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 
 
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     private http:HttpClient,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private route: ActivatedRoute,
   ){
     console.log(linkedInAuthConfig);
     
@@ -79,7 +81,26 @@ export class AppComponent implements OnInit {
     this.authService.signOut();
   }
   ngOnInit(): void {
-    
+    this.route.queryParams.subscribe((params:any) => {
+      const code = params['code'];
+      console.log("code",code);
+      
+      if (code) {
+        // Exchange authorization code for access token
+        // this.authService.exchangeCodeForToken(code).subscribe(
+        //   (response: any) => {
+        //     const accessToken = response.access_token;
+        //     console.log('Access Token:', accessToken);
+        //     // Store the access token (e.g., in localStorage)
+        //     localStorage.setItem('linkedin_access_token', accessToken);
+        //   },
+        //   error => {
+        //     console.error('Error exchanging code for token:', error);
+        //   }
+        // );
+      }
+    });
+  
   }
   loginWithLinkedIn() {
     this.oauthService.initImplicitFlow();
