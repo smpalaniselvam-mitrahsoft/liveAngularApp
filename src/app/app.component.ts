@@ -43,8 +43,6 @@ export class AppComponent implements OnInit {
   ){
     console.log(linkedInAuthConfig);
     
-
-
     this.configureOAuth();
 
     this.authService.authState.subscribe((user) => {
@@ -105,12 +103,7 @@ export class AppComponent implements OnInit {
   
   }
   loginWithLinkedIn() {
-    // this.oauthService.initImplicitFlow();
-    const clientId = '868w6zijo3wvc4';  // From your LinkedIn Developer App
-    const redirectUri =  `${window.location.origin}/liveAngularApp/`;  // Must match what you set in LinkedIn App settings
-    const scope = 'r_liteprofile r_emailaddress';
-    const linkedInAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
-  window.location.href = linkedInAuthUrl;
+    this.oauthService.initImplicitFlow();
   }
   
 
@@ -153,8 +146,9 @@ export class AppComponent implements OnInit {
   private configureOAuth(): void {
     // this.oauthService.configure(linkedInAuthConfig);
     // this.oauthService.setupAutomaticSilentRefresh();
-    // this.oauthService.configure(linkedInAuthConfig);
-    //   this.oauthService.tryLogin();
+    this.oauthService.configure(linkedInAuthConfig);
+      this.oauthService.tryLogin();
+      console.log(this.oauthService.getAccessToken())
       this.handleLinkedInCallback()
   }
 }
