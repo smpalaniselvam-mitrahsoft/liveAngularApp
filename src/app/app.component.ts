@@ -81,6 +81,7 @@ this.http.get(`https://graph.facebook.com/v12.0/me/accounts?access_token=${acces
     console.log("djcdkhv");
     
     this.oauthService.initImplicitFlow();
+    this.handleLinkedInCallback()
   }
 
   handleLinkedInCallback() {
