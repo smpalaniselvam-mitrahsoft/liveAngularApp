@@ -24,6 +24,7 @@ const linkedInAuthConfig: AuthConfig = {
   responseType: 'code',
   scope: 'openid profile email', // Updated scopes
   requireHttps: false, // Set to true in production
+  
 };
 @Component({
   selector: 'app-root',
@@ -81,6 +82,14 @@ export class AppComponent implements OnInit {
     this.authService.signOut();
   }
   ngOnInit(): void {
+
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      if (this.oauthService.hasValidAccessToken()) {
+        const userInfo = this.oauthService.getIdentityClaims();
+        console.log('Logged in user info:', userInfo);
+      }
+    });
+
     this.route.queryParams.subscribe((params:any) => {
       const code = params['code'];
       console.log("code",params);
@@ -117,13 +126,13 @@ export class AppComponent implements OnInit {
           this.getUserInfo();
       }
   });
-
-    // this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-    //   if (this.oauthService.hasValidAccessToken()) {
-    //     const userInfo = this.oauthService.getIdentityClaims();
-    //     console.log('Logged in user info:', userInfo);
-    //   }
-    // });
+  
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      if (this.oauthService.hasValidAccessToken()) {
+        const userInfo = this.oauthService.getIdentityClaims();
+        console.log('Logged in user info:', userInfo);
+      }
+    });
   }
 
 
