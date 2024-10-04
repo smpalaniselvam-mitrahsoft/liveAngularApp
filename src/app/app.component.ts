@@ -21,7 +21,7 @@ const linkedInAuthConfig: AuthConfig = {
   tokenEndpoint: 'https://www.linkedin.com/oauth/v2/accessToken',
   responseType: 'code',
   scope: 'r_emailaddress r_liteprofile',
-  requireHttps: false, // Set to true in production
+  requireHttps: true, // Set to true in production
   showDebugInformation: true,
 };
 @Component({
