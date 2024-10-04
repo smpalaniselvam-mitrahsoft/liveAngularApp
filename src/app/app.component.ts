@@ -88,7 +88,9 @@ export class AppComponent implements OnInit {
     
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.oauthService.hasValidAccessToken()) {
-          // Get user info from LinkedIn
+          // Get user info from LinkedIn;
+          console.log(this.oauthService.hasValidAccessToken());
+          
           this.getUserInfo();
       }
   });
