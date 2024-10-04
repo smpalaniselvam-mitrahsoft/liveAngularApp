@@ -17,7 +17,7 @@ import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 
 const linkedInAuthConfig: AuthConfig = {
   clientId: '868w6zijo3wvc4',
-  redirectUri: 'https://smpalaniselvam-mitrahsoft.github.io/liveAngularApp/',
+  redirectUri: window.location.origin,
   loginUrl: 'https://www.linkedin.com/oauth/v2/authorization',
   tokenEndpoint: 'https://www.linkedin.com/oauth/v2/accessToken',
   responseType: 'code',
