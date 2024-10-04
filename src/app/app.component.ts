@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     console.log(linkedInAuthConfig);
     
     this.configureOAuth();
+
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.getFacebookPages(user.authToken)
@@ -78,7 +79,7 @@ export class AppComponent implements OnInit {
     this.authService.signOut();
   }
   ngOnInit(): void {
-    this.handleLinkedInCallback()
+    
   }
   loginWithLinkedIn() {
     this.oauthService.initImplicitFlow();
@@ -88,9 +89,9 @@ export class AppComponent implements OnInit {
   handleLinkedInCallback() {
     
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      console.log(this.oauthService.hasValidAccessToken());
       if (this.oauthService.hasValidAccessToken()) {
           // Get user info from LinkedIn;
-          console.log(this.oauthService.hasValidAccessToken());
           
           this.getUserInfo();
       }
@@ -126,5 +127,6 @@ export class AppComponent implements OnInit {
     // this.oauthService.setupAutomaticSilentRefresh();
     this.oauthService.configure(linkedInAuthConfig);
       this.oauthService.tryLogin();
+      this.handleLinkedInCallback()
   }
 }
