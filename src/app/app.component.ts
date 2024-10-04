@@ -20,7 +20,7 @@ const linkedInAuthConfig: AuthConfig = {
   loginUrl: 'https://www.linkedin.com/oauth/v2/authorization',
   tokenEndpoint: 'https://www.linkedin.com/oauth/v2/accessToken',
   responseType: 'code',
-  scope: 'r_emailaddress r_liteprofile',
+  scope: 'openid profile email', // Updated scopes
   requireHttps: true, // Set to true in production
   showDebugInformation: true,
 };
