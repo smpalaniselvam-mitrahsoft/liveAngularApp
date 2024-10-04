@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params:any) => {
       const code = params['code'];
-      console.log("code",code);
+      console.log("code",params);
       
       if (code) {
         // Exchange authorization code for access token
