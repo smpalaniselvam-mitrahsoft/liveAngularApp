@@ -27,8 +27,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('847026557578774'), //local support
-            // provider: new FacebookLoginProvider('513143014764831'), //local support
+            // provider: new FacebookLoginProvider('847026557578774'), //local support
+            provider: new FacebookLoginProvider('513143014764831'), //local support
             // provider: new FacebookLoginProvider('950085863826651'), //local support
           }
         ],
