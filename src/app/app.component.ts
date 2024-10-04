@@ -22,8 +22,7 @@ const linkedInAuthConfig: AuthConfig = {
   tokenEndpoint: 'https://www.linkedin.com/oauth/v2/accessToken',
   responseType: 'code',
   scope: 'openid profile email', // Updated scopes
-  requireHttps: true, // Set to true in production
-  showDebugInformation: true,
+  requireHttps: false, // Set to true in production
 };
 @Component({
   selector: 'app-root',
