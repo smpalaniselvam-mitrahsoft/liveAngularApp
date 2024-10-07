@@ -30,8 +30,8 @@ const linkedInAuthConfig: AuthConfig = {
 // environment.ts
 export const environment = {
   instagram: {
-    clientId: 'your-instagram-client-id',
-    redirectUri: 'https://your-app-url.com/auth/callback',
+    clientId: '1689039378550118',
+    redirectUri: `${window.location.origin}/liveAngularApp/`,
     authUrl: 'https://api.instagram.com/oauth/authorize',
     responseType: 'token',
     scope: 'user_profile,user_media',
