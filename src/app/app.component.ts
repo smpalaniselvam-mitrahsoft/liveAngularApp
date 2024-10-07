@@ -15,7 +15,7 @@ import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 // };
 
 
-const linkedInAuthConfig: AuthConfig = {
+const linkedInAuthConfig: any = {
   issuer: 'https://correct-issuer-url',
   clientId: '868w6zijo3wvc4',
   redirectUri: `${window.location.origin}/liveAngularApp/`,
@@ -24,7 +24,7 @@ const linkedInAuthConfig: AuthConfig = {
   responseType: 'code',
   scope: 'openid profile email', // Updated scopes
   requireHttps: false, // Set to true in production
-  
+  clientSecret:'WPL_AP1.6Nge6cjEUWW2JYVg./tEdvw=='
 };
 
 // environment.ts
