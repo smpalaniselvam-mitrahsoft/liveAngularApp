@@ -26,6 +26,18 @@ const linkedInAuthConfig: AuthConfig = {
   requireHttps: false, // Set to true in production
   
 };
+
+// environment.ts
+export const environment = {
+  instagram: {
+    clientId: 'your-instagram-client-id',
+    redirectUri: 'https://your-app-url.com/auth/callback',
+    authUrl: 'https://api.instagram.com/oauth/authorize',
+    responseType: 'token',
+    scope: 'user_profile,user_media',
+  },
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -159,5 +171,21 @@ export class AppComponent implements OnInit {
       this.oauthService.tryLogin();
       console.log(this.oauthService.getAccessToken())
       this.handleLinkedInCallback()
+  }
+
+
+  loginWithInstagram() {
+    const authUrl = `${environment.instagram.authUrl}?client_id=${environment.instagram.clientId}&redirect_uri=${environment.instagram.redirectUri}&response_type=${environment.instagram.responseType}&scope=${environment.instagram.scope}`;
+    
+    window.location.href = authUrl;
+  }
+
+  handleAuthCallback() {
+    const urlParams = new URLSearchParams(window.location.hash);
+    const accessToken = urlParams.get('#access_token');
+    if (accessToken) {
+      // Save the access token for further API requests
+      localStorage.setItem('instagram_access_token', accessToken);
+    }
   }
 }
